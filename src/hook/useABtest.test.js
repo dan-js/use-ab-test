@@ -1,6 +1,4 @@
 /* eslint-env node */
-import { renderHook } from "@testing-library/react-hooks";
-
 import fiftyFiftyVariants from "fx:fiftyFifty.js";
 import twentiesVariants from "fx:twenties.js";
 import canaryVariant from "fx:canary.js";
@@ -13,9 +11,15 @@ import {
 } from "fx:messages.js";
 
 import useABtest from "./useABtest";
-import * as rnd from "../random";
 
-jest.mock("../random");
+const context = {
+    // Easiest way to mock out the random module
+    random: {
+        handler: jest.fn(),
+        lowest: 1e38,
+        highest: 1e40,
+    },
+};
 
 describe("useABtest()", () => {
     beforeEach(() => jest.clearAllMocks());
@@ -34,22 +38,25 @@ describe("useABtest()", () => {
     `(
         "gives the variant $variant for the random value $randomValue",
         ({ randomValue, fiftyFifty, twenties, canary }) => {
-            rnd.default.mockReturnValue(randomValue);
+            context.random.handler.mockReturnValue(randomValue);
 
-            const { current: fiftyFiftyValue } = renderHook(() =>
-                useABtest("variant-test-1", fiftyFiftyVariants)
+            const { current: fiftyFiftyValue } = global.renderWithContext(
+                () => useABtest("variant-test-1", fiftyFiftyVariants),
+                context
             ).result;
 
             expect(fiftyFiftyValue).toBe(fiftyFifty);
 
-            const { current: twentiesValue } = renderHook(() =>
-                useABtest("variant-test-2", twentiesVariants)
+            const { current: twentiesValue } = global.renderWithContext(
+                () => useABtest("variant-test-2", twentiesVariants),
+                context
             ).result;
 
             expect(twentiesValue).toBe(twenties);
 
-            const { current: canaryValue } = renderHook(() =>
-                useABtest("variant-test-3", canaryVariant)
+            const { current: canaryValue } = global.renderWithContext(
+                () => useABtest("variant-test-3", canaryVariant),
+                context
             ).result;
 
             expect(canaryValue).toBe(canary);
@@ -62,7 +69,7 @@ describe("useABtest()", () => {
 
         const { rerender } = global.renderWithContext(
             () => useABtest(experimentId, fiftyFiftyVariants),
-            { onVariantSelect }
+            { onVariantSelect, ...context }
         );
 
         expect(onVariantSelect).toBeCalledTimes(1);
@@ -84,7 +91,7 @@ describe("useABtest()", () => {
 
         expect(onVariantSelect).toBeCalledTimes(1);
         expect(secondOnVariantSelect).not.toBeCalled();
-        expect(rnd.default).toBeCalledTimes(1);
+        expect(context.random.handler).toBeCalledTimes(1);
     });
 
     it("tries to use the value from the context beforeVariantSelect function", () => {
@@ -96,11 +103,11 @@ describe("useABtest()", () => {
             result: { current },
         } = global.renderWithContext(
             () => useABtest(experimentId, fiftyFiftyVariants),
-            { beforeVariantSelect }
+            { beforeVariantSelect, ...context }
         );
 
         expect(beforeVariantSelect).toBeCalledTimes(1);
-        expect(rnd.default).not.toBeCalled();
+        expect(context.random.handler).not.toBeCalled();
         expect(current).toBe(overrideVariant);
     });
 });

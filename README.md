@@ -124,6 +124,29 @@ const App = ({ children }) => (
     </ExperimentProvider>
 );
 ```
+
+### Custom random implementation
+
+The default random implementation uses `window.crypto.getRandomValues()` and is random enough for all standard usage, but providing a new implementation for random is simple! Here's an example using `Math.random()` instead.
+
+```jsx
+const App = ({ children }) => (
+    <ExperimentProvider 
+        preset={PRESETS.LOCAL_STORAGE}
+        random={{
+            // Function to call to get random value
+            handler: Math.random,
+            // Lowest possible number returned from the function
+            lowest: 0,
+            // Highest possible number returned from the function
+            highest: 1,
+        }}
+    >
+        {children}
+    </ExperimentProvider>
+);
+```
+
 ### Custom keys / values
 
 By default when using any preset, the keys and values placed in storage are handled by the package. If you want to override this behaviour, you can create a preset object manually instead of using the `createPreset` helper function.

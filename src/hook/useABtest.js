@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 
 import useExperimentContext from "./useExperimentContext";
-import random, { LOWEST_RANDOM_NUMBER } from "../random";
 import validateVariants from "../validateVariants";
 
 export default (experimentId, variants) => {
@@ -9,6 +8,7 @@ export default (experimentId, variants) => {
         onVariantSelect,
         beforeVariantSelect,
         saveVariant,
+        random,
     } = useExperimentContext();
 
     return useMemo(() => {
@@ -29,9 +29,8 @@ export default (experimentId, variants) => {
             const fullPercentage =
                 curr.percentage + (previous?.fullPercentage ?? 0);
 
-            const startRange =
-                (previous?.fullPercentage ?? 1) * LOWEST_RANDOM_NUMBER;
-            const endRange = fullPercentage * LOWEST_RANDOM_NUMBER;
+            const startRange = (previous?.fullPercentage ?? 1) * random.lowest;
+            const endRange = fullPercentage * random.lowest;
 
             return acc.concat({
                 ...curr,
@@ -41,7 +40,7 @@ export default (experimentId, variants) => {
             });
         }, []);
 
-        const rand = random();
+        const rand = random.handler();
 
         const variantIndex = variantsWithRanges.findIndex(
             ({ startRange, endRange }, idx) =>

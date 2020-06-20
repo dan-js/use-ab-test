@@ -11,7 +11,7 @@ window.crypto = {
         new Array(40).fill(null).map(() => Math.floor(Math.random() * 255)),
 };
 
-global.renderWithContext = (hook, { ...providerProps }) => {
+global.renderWithContext = (hook, { ...providerProps } = {}) => {
     // eslint-disable-next-line react/prop-types
     const wrapper = ({ children }) => (
         <ExperimentProvider {...providerProps}>{children}</ExperimentProvider>

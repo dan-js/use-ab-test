@@ -23,7 +23,7 @@
   "scripts": {
     "test": "jest",
     "test:repeat": "scripts/repeatTests.sh",
-    "test:badges": "yarn test --coverage --coverageReporters=\"json-summary\" && jest-coverage-badges output ./badges",
+    "prepublish": "yarn badges",
     "badges": "scripts/generateBadges.sh",
     "build": "rollup -c",
     "prepare": "install-peers"

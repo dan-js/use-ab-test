@@ -3,6 +3,7 @@ import pt from "prop-types";
 
 import ExperimentContext from "./ExperimentContext";
 import { PRESETS } from "../const";
+import initialProps from "./initialProps";
 import PRESET_MAPPING from "../presets/mapping";
 
 const ExperimentProvider = ({
@@ -11,11 +12,12 @@ const ExperimentProvider = ({
     beforeVariantSelect,
     saveVariant,
     preset,
+    random,
 }) => {
     if (PRESET_MAPPING[preset]) {
         return (
             <ExperimentContext.Provider
-                value={{ ...PRESET_MAPPING[preset], onVariantSelect }}
+                value={{ ...PRESET_MAPPING[preset], onVariantSelect, random }}
             >
                 {children}
             </ExperimentContext.Provider>
@@ -28,6 +30,7 @@ const ExperimentProvider = ({
                 onVariantSelect,
                 beforeVariantSelect,
                 saveVariant,
+                random,
                 ...(preset && { ...preset }),
             }}
         >
@@ -48,13 +51,13 @@ ExperimentProvider.propTypes = {
             beforeVariantSelect: pt.func.isRequired,
         }),
     ]),
+    random: pt.shape({
+        handler: pt.func.isRequired,
+        lowest: pt.number.isRequired,
+        highest: pt.number.isRequired,
+    }).isRequired,
 };
 
-ExperimentProvider.defaultProps = {
-    onVariantSelect: () => {},
-    beforeVariantSelect: () => {},
-    saveVariant: () => {},
-    preset: null,
-};
+ExperimentProvider.defaultProps = initialProps();
 
 export default ExperimentProvider;
