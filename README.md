@@ -2,7 +2,7 @@
 
 [A/B testing](https://en.wikipedia.org/wiki/A/B_testing) and [Canary releases](https://en.wikipedia.org/wiki/Feature_toggle#Canary_release) are quickly becoming more and more popular. This package attempts to simplify these processes in React by providing suitably random variant selection, simple presets for memorising selected variants for users, and easy customisation for integrating with whatever analytics software you choose to use.
 
-The implementation is very lightweight coming in at just **2.17kb** gzipped, and performance is strong enough to run many experiments on a single page if desired.
+The implementation is very lightweight coming in at just **2.17kb** gzipped with no dependencies, and performance is strong enough to run many experiments on a single page if desired.
 
 ## Installation
 

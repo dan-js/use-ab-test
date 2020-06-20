@@ -1,9 +1,9 @@
 {
   "name": "use-ab-test",
-  "description": "Simple A/B testing for React apps!",
-  "homepage": "https://github.com/dan-js/react-pure-state.git",
+  "description": "🧪 Simple A/B testing for React apps!",
+  "homepage": "https://github.com/dan-js/use-ab-test.git",
   "repository": {
-    "url": "https://github.com/dan-js/react-pure-state.git",
+    "url": "https://github.com/dan-js/use-ab-test.git",
     "type": "git"
   },
   "keywords": [
@@ -26,7 +26,7 @@
     "build": "rollup -c",
     "prepare": "install-peers"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "dependencies": {},
   "devDependencies": {
