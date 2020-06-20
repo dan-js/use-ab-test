@@ -1,0 +1,45 @@
+{
+  "name": "use-ab-test",
+  "description": "Simple A/B testing for React apps!",
+  "homepage": "https://github.com/dan-js/react-pure-state.git",
+  "repository": {
+    "url": "https://github.com/dan-js/react-pure-state.git",
+    "type": "git"
+  },
+  "keywords": [
+    "react",
+    "ab-test",
+    "ab-testing",
+    "variants",
+    "variant-testing",
+    "canary",
+    "canary-testing"
+  ],
+  "author": "Dan Nash <dan@nuuji.tech>",
+  "license": "GPL-3.0-or-later",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "test": "jest",
+    "test:repeat": "scripts/repeatTests.sh",
+    "build": "rollup -c",
+    "prepare": "install-peers"
+  },
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@nuuji/config": "^0.1.8",
+    "@testing-library/jest-dom": "^5.7.0",
+    "@testing-library/react": "^10.0.4",
+    "@testing-library/react-hooks": "^3.3.0",
+    "install-peers-cli": "^2.2.0",
+    "react-test-renderer": "^16.13.1"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}

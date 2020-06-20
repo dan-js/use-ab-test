@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validateVariants() throws if variants do not add up to 100% 1`] = `"Variant percentages should always add up to 100%"`;
+
+exports[`validateVariants() throws if variants do not add up to 100% 2`] = `"Variant percentages should always add up to 100%"`;
