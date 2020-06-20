@@ -1,3 +1,8 @@
+![badge-branches.svg](./badges/badge-branches.svg)
+![badge-functions.svg](./badges/badge-functions.svg)
+![badge-lines.svg](./badges/badge-lines.svg)
+![badge-statements.svg](./badges/badge-statements.svg)
+
 # 🧪 `use-ab-test` - Unopinionated, framework-agnostic A/B and Canary testing with React Hooks
 
 [A/B testing](https://en.wikipedia.org/wiki/A/B_testing) and [Canary releases](https://en.wikipedia.org/wiki/Feature_toggle#Canary_release) are quickly becoming more and more popular. This package attempts to simplify these processes in React by providing suitably random variant selection, simple presets for memorising selected variants for users, and easy customisation for integrating with whatever analytics software you choose to use.

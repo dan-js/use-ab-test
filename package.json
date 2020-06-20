@@ -23,6 +23,8 @@
   "scripts": {
     "test": "jest",
     "test:repeat": "scripts/repeatTests.sh",
+    "test:badges": "yarn test --coverage --coverageReporters=\"json-summary\" && jest-coverage-badges output ./badges",
+    "badges": "scripts/generateBadges.sh",
     "build": "rollup -c",
     "prepare": "install-peers"
   },
@@ -34,7 +36,9 @@
     "@testing-library/jest-dom": "^5.7.0",
     "@testing-library/react": "^10.0.4",
     "@testing-library/react-hooks": "^3.3.0",
+    "badge-maker": "^3.1.0",
     "install-peers-cli": "^2.2.0",
+    "jest-coverage-badges": "^1.1.2",
     "react-test-renderer": "^16.13.1"
   },
   "peerDependencies": {
