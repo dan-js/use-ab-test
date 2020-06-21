@@ -36,6 +36,8 @@ const variants = [
 ];
 
 const Message = () => {
+    // Message text has a 50/50 chance of being either
+    // 'Normal Message' or 'New Awesome Message!'
     const messageText = useABtest('message-test', variants);
 
     return <div>{messageText}</div>
@@ -46,6 +48,8 @@ const App = () => {
         console.log(`Selected ${value} at index ${variantIndex} for ${experimentId}`);
 
     return (
+        // Using the `LOCAL_STORAGE` preset means this user's message variant
+        // will be saved indefinitely and won't change on reload / rerender
         <ExperimentProvider preset={PRESETS.LOCAL_STORAGE} onVariantSelect={onVariantSelect}>
             <Message />
         </ExperimentProvider>
