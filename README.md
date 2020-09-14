@@ -83,16 +83,11 @@ const LoggingExperimentProvider = ({ children }) => {
     );
 }
 
-const App = () => {
-    const onVariantSelect = ({ value, variantIndex, experimentId, variants }) => 
-        console.log(`Selected ${value} at index ${variantIndex} for ${experimentId}`);
-
-    return (
-        <ExperimentProvider preset={PRESETS.LOCAL_STORAGE} onVariantSelect={onVariantSelect}>
-            <Message />
-        </ExperimentProvider>
-    );
-};
+const App = () => (
+    <LoggingExperimentProvider>
+        <Message />
+    </LoggingExperimentProvider>
+);
 ```
 
 ### Presets
