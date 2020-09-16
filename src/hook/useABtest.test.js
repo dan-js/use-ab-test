@@ -16,8 +16,8 @@ const context = {
     // Easiest way to mock out the random module
     random: {
         handler: jest.fn(),
-        lowest: 1e38,
-        highest: 1e40,
+        lowest: 0,
+        highest: 1,
     },
 };
 
@@ -26,17 +26,17 @@ describe("useABtest()", () => {
 
     it.each`
         randomValue | fiftyFifty        | twenties          | canary
-        ${1e39}     | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}
-        ${16e38}    | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}
-        ${38e38}    | ${FIRST_MESSAGE}  | ${SECOND_MESSAGE} | ${FIRST_MESSAGE}
-        ${49e38}    | ${FIRST_MESSAGE}  | ${THIRD_MESSAGE}  | ${FIRST_MESSAGE}
-        ${5e39}     | ${SECOND_MESSAGE} | ${THIRD_MESSAGE}  | ${FIRST_MESSAGE}
-        ${59e38}    | ${SECOND_MESSAGE} | ${THIRD_MESSAGE}  | ${FIRST_MESSAGE}
-        ${78e38}    | ${SECOND_MESSAGE} | ${FOURTH_MESSAGE} | ${FIRST_MESSAGE}
-        ${98e38}    | ${SECOND_MESSAGE} | ${FIFTH_MESSAGE}  | ${SECOND_MESSAGE}
-        ${1e40}     | ${SECOND_MESSAGE} | ${FIFTH_MESSAGE}  | ${SECOND_MESSAGE}
+        ${0}        | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}
+        ${0.16}     | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}  | ${FIRST_MESSAGE}
+        ${0.38}     | ${FIRST_MESSAGE}  | ${SECOND_MESSAGE} | ${FIRST_MESSAGE}
+        ${0.49}     | ${FIRST_MESSAGE}  | ${THIRD_MESSAGE}  | ${FIRST_MESSAGE}
+        ${0.5}      | ${SECOND_MESSAGE} | ${THIRD_MESSAGE}  | ${FIRST_MESSAGE}
+        ${0.59}     | ${SECOND_MESSAGE} | ${THIRD_MESSAGE}  | ${FIRST_MESSAGE}
+        ${0.78}     | ${SECOND_MESSAGE} | ${FOURTH_MESSAGE} | ${FIRST_MESSAGE}
+        ${0.98}     | ${SECOND_MESSAGE} | ${FIFTH_MESSAGE}  | ${SECOND_MESSAGE}
+        ${1}        | ${SECOND_MESSAGE} | ${FIFTH_MESSAGE}  | ${SECOND_MESSAGE}
     `(
-        "gives the variant $variant for the random value $randomValue",
+        "gives $fiftyFifty, $twenties and $canary for the random value $randomValue",
         ({ randomValue, fiftyFifty, twenties, canary }) => {
             context.random.handler.mockReturnValue(randomValue);
 

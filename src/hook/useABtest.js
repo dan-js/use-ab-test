@@ -29,8 +29,8 @@ export default (experimentId, variants) => {
             const fullPercentage =
                 curr.percentage + (previous?.fullPercentage ?? 0);
 
-            const startRange = (previous?.fullPercentage ?? 1) * random.lowest;
-            const endRange = fullPercentage * random.lowest;
+            const startRange = previous?.fullPercentage ?? 0;
+            const endRange = fullPercentage;
 
             return acc.concat({
                 ...curr,
@@ -40,7 +40,11 @@ export default (experimentId, variants) => {
             });
         }, []);
 
-        const rand = random.handler();
+        // Get a random number with our handler and normalise so it's in a 0-100 range
+        const rand =
+            ((random.handler() - random.lowest) / random.highest -
+                random.lowest) *
+            100;
 
         const variantIndex = variantsWithRanges.findIndex(
             ({ startRange, endRange }, idx) =>
@@ -49,7 +53,14 @@ export default (experimentId, variants) => {
                 (idx === variantsWithRanges.length - 1 && endRange === rand)
         );
 
-        const { value } = variantsWithRanges[variantIndex];
+        let { value } = variantsWithRanges[variantIndex] ?? {};
+
+        if (!value) {
+            console.error(
+                `[use-ab-test]: An error occurred selecting a random variant, please check your ExperimentProvider configuration.\nFalling back to first variant`
+            );
+            value = variantsWithRanges[0].value;
+        }
 
         saveVariant &&
             saveVariant({ value, variantIndex, experimentId, variants });

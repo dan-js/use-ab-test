@@ -11,8 +11,8 @@ describe("initialProps()", () => {
             preset: null,
             random: {
                 handler: random,
-                lowest: 1e38,
-                highest: 1e40,
+                lowest: 0,
+                highest: 1,
             },
         });
     });
