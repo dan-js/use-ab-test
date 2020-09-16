@@ -18,7 +18,8 @@
   "author": "Dan Nash <dan@nuuji.tech>",
   "license": "GPL-3.0-or-later",
   "files": [
-    "lib/"
+    "lib/",
+    "test-utils/"
   ],
   "scripts": {
     "test": "jest",

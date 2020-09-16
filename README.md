@@ -97,6 +97,20 @@ const App = () => (
 | `LOCAL_STORAGE` | Store selected segments in `window.localStorage`. This won't expire until explicitly cleared.                                                                                      |
 | `SESSION`       | Store selected segments in `window.sessionStorage`. This will expire at the end of the session (behaviour varies by browser so you should **almost always** prefer `LOCAL_STORAGE`, or a [Custom Preset](#Custom-Presets)). |
 
+## Testing
+
+You may come across errors when testing due to `window.crypto` being undefined. The package provides a set of `/test-utils` exports to help with this.
+
+```jsx
+import { setupWindowCrypto, teardownWindowCrypto } from 'use-ab-test/test-utils';
+
+describe('some component', () => {
+    beforeEach(() => setupWindowCrypto());
+
+    afterEach(() => teardownWindowCrypto());
+});
+```
+
 
 ## Advanced Usage
 
