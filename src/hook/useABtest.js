@@ -4,12 +4,8 @@ import useExperimentContext from "./useExperimentContext";
 import validateVariants from "../validateVariants";
 
 export default (experimentId, variants) => {
-    const {
-        onVariantSelect,
-        beforeVariantSelect,
-        saveVariant,
-        random,
-    } = useExperimentContext();
+    const { onVariantSelect, beforeVariantSelect, saveVariant, random } =
+        useExperimentContext();
 
     return useMemo(() => {
         validateVariants(variants);
